@@ -164,6 +164,7 @@ def search():
     return resp
 
 if __name__ == '__main__':
+    import os
     Category.create_table(fail_silently=True)
     Continent.create_table(fail_silently=True)
     Country.create_table(fail_silently=True)
