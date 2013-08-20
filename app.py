@@ -219,9 +219,9 @@ def station(id):
 @app.route('/api/search/', methods=["GET"])
 def search():
     q = request.args['q']
-    q = "*%s*" % q
+    q = '%'+q+'%'
     stations_json = {'objects': []}
-    stations = Station.select().where(Station.title % q)
+    stations = Station.select().where(Station.title ** q)
     for s in stations:
         sources = Source.select().join(Station).where(Station.id == s.id).limit(1)
         infos = {
