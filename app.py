@@ -234,6 +234,23 @@ def search():
     resp = Response(json.dumps(stations_json), status=200, mimetype='application/json')
     return resp
 
+@app.route('/api/nearby/', methods=["GET"])
+def nearby():
+    q = request.args['q']
+    stations_json = {'objects': []}
+    stations = Station.select().join(Country).where(Country.title == q)
+    for s in stations:
+        sources = Source.select().join(Station).where(Station.id == s.id).limit(1)
+        infos = {
+            'id': s.id,
+            'title': s.title,
+            'url': s.url,
+            'source': sources[0].url
+        }
+        stations_json['objects'].append(infos)
+    resp = Response(json.dumps(stations_json), status=200, mimetype='application/json')
+    return resp
+
 if __name__ == '__main__':
     import os
     Category.create_table(fail_silently=True)
