@@ -1,9 +1,6 @@
 # -*- coding: UTF-8 -*-
 from django.db import models
 
-from managers import *
-
-
 class Category(models.Model):
     title = models.CharField("Title", max_length="255", blank=False, null=True)
     objects = models.Manager()
