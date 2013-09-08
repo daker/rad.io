@@ -162,7 +162,7 @@ def station(request, id):
 def search(request):
     q = request.GET.get('q')
     stations_json = {'objects': []}
-    stations = Station.objects.filter(title__contains=q)
+    stations = Station.objects.filter(title__icontains=q)
     for s in stations:
         sources = Source.objects.filter(station__id=s.id)[:1]
         infos = {
