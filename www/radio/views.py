@@ -67,9 +67,9 @@ def country(request, id):
 def countrystations(request, id):
     countrystations_json = {'objects': []}
 
-    countriesstations = Station.select().join(Country).where(Country.id == id)
+    countriesstations = Station.objects.filter(country__pk=id)
     for s in countriesstations:
-        sources = Source.select().join(Station).where(Station.id == s.id).limit(1)
+        sources = Source.objects.filter(station__pk=s.id)[:1]
         infos = {
             'id': s.id,
             'title': s.title,
@@ -97,10 +97,9 @@ def languages(request):
 def language(request, id):
     stations_json = {'objects': []}
 
-    stations = Station.select().join(Language).where(Language.id == id)
-
+    stations = Station.objects.filter(language__pk=id)
     for s in stations:
-        sources = Source.select().join(Station).where(Station.id == s.id).limit(1)
+        sources = Source.objects.filter(station__pk=s.id)[:1]
         infos = {
             'id': s.id,
             'title': s.title,
