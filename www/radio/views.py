@@ -178,6 +178,8 @@ def search(request):
 
 def nearby(request):
     q = request.GET.get('q')
+    if q == "United States":
+        q = "USA"
     stations_json = {'objects': []}
     stations = Station.objects.filter(country__title=q)
     for s in stations:
