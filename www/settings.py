@@ -1,4 +1,4 @@
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -108,6 +108,8 @@ LOGGING = {
         },
     }
 }
+
+ALLOWED_HOSTS = [".herokuapp.com"]
 
 import dj_database_url
 import os
