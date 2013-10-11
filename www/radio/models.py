@@ -58,4 +58,4 @@ class Source(models.Model):
     objects = models.Manager()
 
     def __unicode__(self):
-        return u"%s" % (self.title)
+        return u"%s" % (self.url)
